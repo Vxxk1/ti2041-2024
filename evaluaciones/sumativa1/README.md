@@ -1,5 +1,3 @@
-# ti2041-2024
-
 ## Estructura del Proyecto
 
 El proyecto está organizado de la siguiente manera:
