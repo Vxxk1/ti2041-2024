@@ -1,11 +1,9 @@
-/* Reset básico */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* Estilos generales */
 body {
     font-family: Arial, sans-serif;
     line-height: 1.6;
@@ -14,14 +12,12 @@ body {
     padding: 20px;
 }
 
-/* Encabezado */
 h1 {
     color: #4CAF50;
     margin-bottom: 20px;
     text-align: center;
 }
 
-/* Navegación */
 nav {
     background: #333;
     color: #fff;
@@ -50,7 +46,6 @@ nav ul li a:hover {
     border-radius: 5px;
 }
 
-/* Formulario */
 form {
     background: #fff;
     padding: 20px;
@@ -78,7 +73,6 @@ button:hover {
     background: #45a049;
 }
 
-/* Resultados */
 .resultado {
     background: #fff;
     padding: 20px;
