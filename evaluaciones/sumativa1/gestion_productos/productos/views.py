@@ -1,23 +1,24 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from .models import Producto
 from .forms import ProductoForm
-from django.http import HttpResponse
 
-productos_registrados = [] 
+# Vista para listar productos
+def index(request):
+    productos = Producto.objects.all()  # Obtener todos los productos
+    return render(request, 'index.html', {'productos': productos})
 
-def productos_home(request):
-    return render(request, 'productos/index.html') 
-
-def registrar_producto(request):
+# Vista para registrar un producto
+def register_product(request):
     if request.method == 'POST':
         form = ProductoForm(request.POST)
         if form.is_valid():
-            
-            productos_registrados.append(form.cleaned_data)
-            return render(request, 'productos/resultado.html', {'producto': form.cleaned_data})
+            producto = form.save()  # Guardar el producto en la base de datos
+            return redirect('result', producto_id=producto.id)  # Redirigir a la pantalla de resultado
     else:
         form = ProductoForm()
-    return render(request, 'productos/registro.html', {'form': form})
+    return render(request, 'registro.html', {'form': form})
 
-def consulta_productos(request):
-
-    return render(request, 'productos/consulta.html', {'productos': productos_registrados})
+# Vista para mostrar el resultado de la creación de un producto
+def result(request, producto_id):
+    producto = Producto.objects.get(id=producto_id)  # Obtener el producto por su ID
+    return render(request, 'resultado.html', {'producto': producto})

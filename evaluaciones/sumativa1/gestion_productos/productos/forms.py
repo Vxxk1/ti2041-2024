@@ -1,7 +1,12 @@
 from django import forms
+from .models import Producto, Caracteristica
 
-class ProductoForm(forms.Form):
-    codigo = forms.CharField(label='Código', max_length=100)
-    nombre = forms.CharField(label='Nombre', max_length=100)
-    marca = forms.CharField(label='Marca', max_length=100)
-    fecha_vencimiento = forms.DateField(label='Fecha de Vencimiento', widget=forms.SelectDateWidget)
+class ProductoForm(forms.ModelForm):
+    class Meta:
+        model = Producto
+        fields = ['codigo', 'nombre', 'precio', 'marca', 'categoria', 'caracteristicas']
+
+class CaracteristicaForm(forms.ModelForm):
+    class Meta:
+        model = Caracteristica
+        fields = ['nombre']

@@ -3,17 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Página de Productos</title>
+    <title>Lista de Productos</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'productos/style.css' %}">
 </head>
 <body>
-    <h1>Bienvenido a la página de productos</h1>
-    <nav>
-        <ul>
-            <li><a href="{% url 'registrar_producto' %}">Registrar Producto</a></li>
-            <li><a href="{% url 'consulta_productos' %}">Consultar Productos</a></li>
-        </ul>
-    </nav>
+    <h1>Lista de Productos</h1>
+    <ul>
+        {% for producto in productos %}
+            <li>
+                Código: {{ producto.codigo }} - Nombre: {{ producto.nombre }} - Marca: {{ producto.marca.nombre }} - Precio: {{ producto.precio }}
+            </li>
+        {% empty %}
+            <p>No hay productos registrados.</p>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'register_product' %}">Registrar un nuevo producto</a>
 </body>
 </html>
