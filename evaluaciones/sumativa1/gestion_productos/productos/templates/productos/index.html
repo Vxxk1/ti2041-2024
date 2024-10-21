@@ -10,6 +10,13 @@
 <body>
     <h1>Lista de Productos Registrados</h1>
 
+    <!-- Enlace para ir a la página de registrar productos -->
+    <nav>
+        <ul>
+            <li><a href="{% url 'register_product' %}">Registrar Producto</a></li>
+        </ul>
+    </nav>
+
     <!-- Formulario para aplicar el filtro por nombre -->
     <form method="GET" action="{% url 'index' %}">
         <label for="nombre">Nombre:</label>
@@ -21,7 +28,7 @@
     <ul>
         {% for producto in productos %}
             <li>
-                Código: {{ producto.codigo }} - Nombre: {{ producto.nombre }} - Marca: {{ producto.marca }} - Categoría: {{ producto.categoria.nombre }}
+                <strong>Código:</strong> {{ producto.codigo }} - <strong>Nombre:</strong> {{ producto.nombre }} - <strong>Marca:</strong> {{ producto.marca }} - <strong>Categoría:</strong> {{ producto.categoria.nombre }}
             </li>
         {% empty %}
             <p>No hay productos que coincidan con el nombre ingresado.</p>

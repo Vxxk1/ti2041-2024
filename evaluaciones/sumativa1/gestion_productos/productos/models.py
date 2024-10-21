@@ -1,9 +1,5 @@
 from django.db import models
 
-# Create your models here.
-
-from django.db import models
-
 class Marca(models.Model):
     nombre = models.CharField(max_length=100)
 
@@ -18,12 +14,16 @@ class Categoria(models.Model):
 
 class Caracteristica(models.Model):
     nombre = models.CharField(max_length=100)
+    descripcion = models.TextField() 
+
+    def __str__(self):
+        return self.nombre
 
     def __str__(self):
         return self.nombre
 
 class Producto(models.Model):
-    codigo = models.CharField(max_length=50, unique=True)  # Código único
+    codigo = models.CharField(max_length=50, unique=True)
     nombre = models.CharField(max_length=200)
     precio = models.DecimalField(max_digits=10, decimal_places=2)
     marca = models.ForeignKey(Marca, on_delete=models.CASCADE)

@@ -9,4 +9,4 @@ class ProductoForm(forms.ModelForm):
 class CaracteristicaForm(forms.ModelForm):
     class Meta:
         model = Caracteristica
-        fields = ['nombre']
+        fields = ['nombre', 'descripcion']
