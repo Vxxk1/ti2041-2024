@@ -1,35 +1,83 @@
-## Estructura del Proyecto
 
-El proyecto está organizado de la siguiente manera:
+Evaluación Sumativa 3
 
-evaluaciones/ │ └───sumativa1/ │ └───biblioteca/ # Proyecto Django │ └───bib1/ # Aplicación dentro del proyecto
+Esta aplicación web, desarrollada en Django, está diseñada para gestionar productos, marcas, categorías y características. Ofrece funcionalidades como registro, filtrado y validación de productos, con medidas de seguridad integradas para garantizar una experiencia confiable.
 
-## Requisitos Previos
+Requisitos
+Python 3.11 o superior
+Django 5.1
 
-Antes de ejecutar el proyecto, asegúrate de tener instalados los siguientes requisitos:
+Guía de Instalación
 
-1. **Python**: Se requiere tener Python instalado. Puedes descargarlo desde [python.org](https://www.python.org/).
-2. **pip**: El gestor de paquetes de Python (`pip`) también debe estar instalado.
-3. **Django**: Instala Django ejecutando el siguiente comando: pip install django
-
-## Instrucciones para Ejecutar el Proyecto
-
-1. Clona el proyecto utilizando Git: git clone <repositorio-url>
-2. Navega a la carpeta del proyecto
-3. Inicia el servidor de desarrollo de Django: python manage.py runserver
-4. Abre tu navegador web y navega a http://localhost:8000 para ver el proyecto en ejecución.
-
-Funcionalidades
-Listar productos: Muestra una lista de todos los productos registrados.
-Registrar producto: Permite registrar nuevos productos con validación de datos.
-Validación de producto: Asegura que el nombre, precio y descripción sean proporcionados antes de registrar el producto.
-Estructura del proyecto
-La estructura del proyecto es la siguiente:
-
-productos/: Contiene la lógica principal de la aplicación, incluidas vistas y modelos.
-static/: Archivos estáticos, como el CSS personalizado.
-templates/: Contiene los templates HTML para listar, registrar, y mostrar resultados.
-manage.py: Script para gestionar el proyecto Django.
+Instalar dependencias necesarias
+bash
+Copiar código
+pip install django
 
 
+Aplicar migraciones
 
+python manage.py migrate
+
+
+Ejecutar el servidor de desarrollo
+
+python manage.py runserver
+
+
+Acceder a la aplicación en el navegador:
+
+Inicio de sesión: http://127.0.0.1:8000/login/
+Lista de productos: http://127.0.0.1:8000/productos/
+
+Principales Funcionalidades
+
+Listado de productos
+Presenta un listado con opciones para filtrar por marca, categoría o características.
+
+Registro de productos
+Permite añadir nuevos productos, validando que no existan duplicados.
+
+Mensajes de operación
+Informa si el registro de un producto fue exitoso o si ocurrió algún error.
+
+Autenticación y cierre de sesión
+Gestión de acceso a través de un sistema de login y logout.
+
+Panel de administración
+Administración avanzada de datos mediante el panel integrado de Django.
+
+Medidas de Seguridad
+
+Acceso autenticado
+Descripción: Las vistas principales, como listar_productos y registro_producto, requieren autenticación.
+
+Implementación:
+
+from django.contrib.auth.decorators import login_required
+
+@login_required
+def listar_productos(request):
+
+Restringe el acceso a usuarios no autenticados.
+
+Protección CSRF
+Descripción: Los formularios incluyen un token CSRF para validar solicitudes POST.
+
+Implementación:
+
+<form method="POST">
+    {% csrf_token %}
+</form>
+
+Bloquea intentos de falsificación de solicitudes entre sitios.
+
+Variables de sesión
+Descripción: Durante el inicio de sesión, se almacenan datos clave en la sesión, como el nombre del usuario y su pertenencia al grupo ADMIN_PRODUCTS.
+
+Implementación:
+
+request.session['username'] = user.username
+request.session['is_admin_products'] = user.groups.filter(name='ADMIN_PRODUCTS').exists()
+
+Controla el acceso a funciones administrativas según roles.

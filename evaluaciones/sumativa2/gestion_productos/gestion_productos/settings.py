@@ -122,3 +122,12 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+
+CSRF_FAILURE_VIEW = 'productos.views.csrf_failure'
+
+# Redirección al iniciar sesión
+LOGIN_REDIRECT_URL = '/productos'  # productos
+
+LOGIN_URL = '/login/'  # Página de login si el usuario no está autenticado

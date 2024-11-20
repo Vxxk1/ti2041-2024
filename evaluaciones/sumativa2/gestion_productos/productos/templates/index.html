@@ -1,0 +1,73 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Productos</title>
+    <link rel="stylesheet" href="{% static 'productos/style.css' %}">
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="/admin/">Administración</a></li>
+            <li><a href="/logout/">Salir</a></li>
+        </ul>
+    </nav>
+    
+    <h1>Lista de Productos</h1>
+
+    <form method="GET" action=".">
+        <div>
+            <label for="marca">Marca:</label>
+            <select name="marca" id="marca">
+                <option value="">Todas</option>
+                {% for marca in marcas %}
+                <option value="{{ marca.id }}">{{ marca.nombre }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div>
+            <label for="categoria">Categoría:</label>
+            <select name="categoria" id="categoria">
+                <option value="">Todas</option>
+                {% for categoria in categorias %}
+                <option value="{{ categoria.id }}">{{ categoria.nombre }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div>
+            <label for="caracteristica">Característica:</label>
+            <select name="caracteristica" id="caracteristica">
+                <option value="">Todas</option>
+                {% for caracteristica in caracteristicas %}
+                <option value="{{ caracteristica.id }}">{{ caracteristica.nombre }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <button type="submit">Aplicar</button>
+    </form>
+
+    <ul>
+        {% for producto in productos %}
+        <li>
+            <strong>Código:</strong> {{ producto.codigo }}<br>
+            <strong>Nombre:</strong> {{ producto.nombre }}<br>
+            <strong>Precio:</strong> ${{ producto.precio }}<br>
+            <strong>Marca:</strong> {{ producto.marca.nombre }}<br>
+            <strong>Categoría:</strong> {{ producto.categoria.nombre }}
+        </li>
+        {% empty %}
+        <li>No hay productos disponibles.</li>
+        {% endfor %}
+    </ul>
+
+    <div style="text-align: center; margin-top: 20px;">
+        <a href="{% url 'registro_producto' %}" class="btn-custom">Registrar nuevo producto</a>
+    </div>
+</body>
+</html>
