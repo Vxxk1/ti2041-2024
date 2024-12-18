@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'productos',
+    'productos',  # Tu aplicación personalizada
+    'ninja',  # Agregar django-ninja
 ]
 
 MIDDLEWARE = [
@@ -131,3 +132,8 @@ CSRF_FAILURE_VIEW = 'productos.views.csrf_failure'
 LOGIN_REDIRECT_URL = '/productos'  # productos
 
 LOGIN_URL = '/login/'  # Página de login si el usuario no está autenticado
+
+# Configuración de JWT
+JWT_SECRET_KEY = 'InAcAp2024'  # Tu clave secreta para JWT
+JWT_ALGORITHM = 'HS256'  # Algoritmo de codificación utilizado
+JWT_EXPIRATION_TIME = 3600  # Tiempo de expiración en segundos (1 hora)
